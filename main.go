@@ -1,25 +1,77 @@
 package main
 
-import "/src/test"
+import (
+	"fmt"
+	events "main/src/Events"
+	"main/src/core"
+	"os"
+	"os/signal"
+	"syscall"
+
+	"github.com/bwmarrin/discordgo"
+	"github.com/pelletier/go-toml/v2"
+)
+
+type Config struct {
+	Bot    BotConfig
+	Client ClientConfig
+}
+
+type BotConfig struct {
+	DiscordToken string `toml:"discord_token"`
+}
+
+type ClientConfig struct {
+	ClientID string `toml:"client_id"`
+}
 
 func main() {
-	// println("test")
 
-	// var test = 1.5
-	// var test2 = 1
+	tomlFilePath := "src/files/config.toml"
 
-	test.Test21()
-	// fmt.Println(test.Test())
+	file, err := os.Open(tomlFilePath)
+	if err != nil {
+		fmt.Println("Erreur lors de l'ouverture du fichier TOML:", err)
+		return
+	}
+	defer file.Close()
 
-	// if test > 6 {
-	// 	println("C'est supérieur!")
-	// } else {
-	// 	println("C'est inférieur !")
-	// }
+	var config Config
 
-	// if test*float64(test2) >= 50 {
-	// 	println("test")
-	// } else {
-	// 	println(test * float64(test2))
-	// }
+	// Chargez les données depuis le fichier TOML en décodant dans la structure
+	if err := toml.NewDecoder(file).Decode(&config); err != nil {
+		fmt.Println("Erreur lors du chargement du fichier TOML:", err)
+		return
+	}
+
+	dg, err := discordgo.New("Bot " + config.Bot.DiscordToken)
+	if err != nil {
+		fmt.Println("error creating Discord session,", err)
+		return
+	}
+
+	// Register the messageCreate func as a callback for MessageCreate events.
+	dg.AddHandler(events.MessageCreate)
+
+	// In this example, we only care about receiving message events.
+	dg.Identify.Intents = discordgo.IntentsGuildMessages
+
+	// Open a websocket connection to Discord and begin listening.
+	err = dg.Open()
+	if err != nil {
+		fmt.Println("error opening connection,", err)
+		return
+	}
+
+	// Wait here until CTRL-C or other term signal is received.
+	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
+	<-sc
+
+	// Cleanly close down the Discord session.
+	dg.Close()
+
+	core.Test()
+	core.EventManager()
 }

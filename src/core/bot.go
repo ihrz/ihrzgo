@@ -1,4 +1,4 @@
-package bot
+package core
 
 var test = "test"
 
