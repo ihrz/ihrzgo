@@ -17,7 +17,7 @@ func init() {
 		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 			Type: discordgo.InteractionResponseChannelMessageWithSource,
 			Data: &discordgo.InteractionResponseData{
-				Content: "Pong!",
+				Content: "Powng!",
 			},
 		})
 	}

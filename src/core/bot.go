@@ -43,6 +43,7 @@ func BotConnect() {
 		return
 	}
 
+	// connection avec le token
 	dg, err := discordgo.New("Bot " + config.Bot.DiscordToken)
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
