@@ -1,17 +1,26 @@
 package commands
 
-import "github.com/bwmarrin/discordgo"
+import (
+	commands "main/src"
 
-var PingCommand = discordgo.ApplicationCommand{
-	Name:        "ping",
-	Description: "Ping command",
-}
+	"github.com/bwmarrin/discordgo"
+)
 
-func HandlePing(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-		Type: discordgo.InteractionResponseChannelMessageWithSource,
-		Data: &discordgo.InteractionResponseData{
-			Content: "Pong!",
-		},
-	})
+func init() {
+	// Enregistrez la commande
+	command := &discordgo.ApplicationCommand{
+		Name:        "ping",
+		Description: "ping!",
+	}
+
+	commandHandler := func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			Type: discordgo.InteractionResponseChannelMessageWithSource,
+			Data: &discordgo.InteractionResponseData{
+				Content: "Pong!",
+			},
+		})
+	}
+
+	commands.AddCommand(command, commandHandler)
 }

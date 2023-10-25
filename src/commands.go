@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"fmt"
+
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -9,17 +11,15 @@ var registeredCommands = make([]*discordgo.ApplicationCommand, 0)
 
 // AddCommand ajoute une commande au gestionnaire
 func AddCommand(command *discordgo.ApplicationCommand, handler func(s *discordgo.Session, i *discordgo.InteractionCreate)) {
-	print("add command tqt ")
 	commandHandlers[command.Name] = handler
 	registeredCommands = append(registeredCommands, command)
 }
 
 // RegisterCommands enregistre toutes les commandes dans Discord
 func RegisterCommands(s *discordgo.Session, botID, guildID string) {
-	println("test de registercommands")
-	println(registeredCommands)
 
 	for _, command := range registeredCommands {
+		fmt.Println("Registering :", command.Name+"\n> ("+command.Description+")")
 		_, err := s.ApplicationCommandCreate(botID, guildID, command)
 		if err != nil {
 			panic(err)
