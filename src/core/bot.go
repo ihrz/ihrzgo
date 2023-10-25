@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	commands "main/src"
 	events "main/src/Events"
 	"os"
 	"os/signal"
@@ -49,11 +50,10 @@ func BotConnect() {
 	}
 
 	// Register the events for the bot.
+	dg.AddHandler(commands.HandleCommand)
 	dg.AddHandler(events.MessageCreate)
 	dg.AddHandler(events.MessageDelete)
-
-	// In this example, we only care about receiving message events.
-	// dg.Identify.Intents = discordgo.IntentsGuildMessages
+	dg.AddHandler(events.Ready)
 
 	// Open a websocket connection to Discord and begin listening.
 	err = dg.Open()
