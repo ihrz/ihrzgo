@@ -1,6 +1,8 @@
 package main
 
-import "/src/test"
+import (
+  "/src/test"
+)
 
 func main() {
 	// println("test")
