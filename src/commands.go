@@ -24,12 +24,10 @@ func RegisterCommands(s *discordgo.Session, botID, guildID string) {
 	}
 
 	for _, command := range commands {
-		fmt.Println(command.Name)
-
 		// Vérifiez si la commande actuelle doit être supprimée
 		shouldDelete := true
 		for _, registeredCommand := range registeredCommands {
-			if registeredCommand.Name == command.Name {
+			if registeredCommand.Name == command.Name && registeredCommand.Description == command.Description {
 				shouldDelete = false
 				break
 			}
