@@ -19,7 +19,7 @@ func AddCommand(command *discordgo.ApplicationCommand, handler func(s *discordgo
 func RegisterCommands(s *discordgo.Session, botID, guildID string) {
 
 	for _, command := range registeredCommands {
-		fmt.Println("Registering :", command.Name+"\n> ("+command.Description+")")
+		fmt.Println("Registering :", command.Name)
 		_, err := s.ApplicationCommandCreate(botID, guildID, command)
 		if err != nil {
 			panic(err)
