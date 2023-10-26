@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	core.DataBase()
 	commands.InitialDynamicImport()
 	// core.EventManager()
 	core.BotConnect()

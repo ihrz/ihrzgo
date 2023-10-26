@@ -6,7 +6,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func GetLanguage() {
+func GetLanguage() map[string]interface{} {
 	filePath := "src/lang/en-US.yml"
 
 	// Lire le contenu du fichier YAML
@@ -24,5 +24,5 @@ func GetLanguage() {
 		panic(err)
 	}
 
-	print(data["test"].(string))
+	return data
 }

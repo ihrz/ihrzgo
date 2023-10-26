@@ -16,11 +16,12 @@ func init() {
 
 	commandHandler := func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
-		core.GetLanguage()
+		var lang = core.GetLanguage()
+
 		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 			Type: discordgo.InteractionResponseChannelMessageWithSource,
 			Data: &discordgo.InteractionResponseData{
-				Content: "Powng!",
+				Content: lang["links_msg"].(string),
 			},
 		})
 	}
