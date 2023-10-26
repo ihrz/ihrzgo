@@ -7,7 +7,6 @@ import (
 
 func main() {
 	commands.InitialDynamicImport()
-	core.EventManager()
-
+	// core.EventManager()
 	core.BotConnect()
 }
