@@ -33,6 +33,11 @@ func init() {
 					Value: "tes3",
 				},
 			},
+			Footer: &discordgo.MessageEmbedFooter{
+				Text:    s.State.User.Username,
+				IconURL: s.State.User.AvatarURL("512"),
+			},
+			Color: 15859878,
 		}
 
 		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
