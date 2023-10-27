@@ -13,16 +13,18 @@ import (
 )
 
 type Config struct {
-	Bot    BotConfig
-	Client ClientConfig
+	Bot BotConfig
+	API Api
 }
 
 type BotConfig struct {
 	DiscordToken string `toml:"discord_token"`
+	ClientID     string `toml:"client_id"`
 }
 
-type ClientConfig struct {
-	ClientID string `toml:"client_id"`
+type Api struct {
+	UseHttps bool `toml:"use_https"`
+	HostPort int  `toml:"host_port"`
 }
 
 func BotConnect() {
