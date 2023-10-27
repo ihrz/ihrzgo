@@ -11,6 +11,7 @@ import (
 
 func GuildCreate(s *discordgo.Session, g *discordgo.GuildCreate) {
 	messageToServer(s, g)
+	ownerLogsForGuildCreate(s, g)
 }
 
 func messageToServer(session *discordgo.Session, guild *discordgo.GuildCreate) {
@@ -48,7 +49,7 @@ Thanks for choosing me, and let's have some fun together!`,
 	}
 }
 
-func ownerLogs(session *discordgo.Session, guild *discordgo.Guild) {
+func ownerLogsForGuildCreate(session *discordgo.Session, guild *discordgo.GuildCreate) {
 	var i string
 	if guild.VanityURLCode != "" {
 		i = "discord.gg/" + guild.VanityURLCode
