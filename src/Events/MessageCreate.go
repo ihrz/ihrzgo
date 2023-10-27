@@ -1,6 +1,10 @@
 package events
 
-import "github.com/bwmarrin/discordgo"
+import (
+	"strings"
+
+	"github.com/bwmarrin/discordgo"
+)
 
 // var data = core.GetLanguage()
 
@@ -159,6 +163,39 @@ import "github.com/bwmarrin/discordgo"
 // 	}
 // }
 
+func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+	reactToMessage(s, m)
+}
+
+func reactToMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if m.GuildID == "" || m.Author.Bot {
+		return
+	}
+
+	recognizeItems := []string{
+		"hey",
+		"salut",
+		"coucou",
+		"bonjour",
+		"salem",
+		"wesh",
+		"hello",
+		"bienvenue",
+	}
+
+	contentLower := strings.ToLower(strings.Fields(m.Content)[0])
+	for _, content := range recognizeItems {
+		if strings.HasPrefix(contentLower, content) {
+			err := s.MessageReactionAdd(m.ChannelID, m.ID, "👋")
+			if err != nil {
+				// Gérer les erreurs
+			}
+			return
+		}
+	}
+
+}
+
 // func suggestion(session *discordgo.Session, message *discordgo.MessageCreate) {
 // 	baseData := getSuggestConfig(message.GuildID)
 
@@ -211,35 +248,3 @@ import "github.com/bwmarrin/discordgo"
 // 		MsgID:  msg.ID,
 // 	})
 // }
-
-// func reactToHeyMSG(session *discordgo.Session, message *discordgo.MessageCreate) {
-// 	if message.GuildID == "" || message.Author.Bot || message.Channel == nil {
-// 		return
-// 	}
-
-// 	recognizeItems := []string{
-// 		"hey",
-// 		"salut",
-// 		"coucou",
-// 		"bonjour",
-// 		"salem",
-// 		"wesh",
-// 		"hello",
-// 		"bienvenue",
-// 	}
-
-// 	contentLower := strings.ToLower(strings.Fields(message.Content)[0])
-// 	for _, content := range recognizeItems {
-// 		if strings.HasPrefix(contentLower, content) {
-// 			err := session.MessageReactionAdd(message.ChannelID, message.ID, "👋")
-// 			if err != nil {
-// 				// Gérer les erreurs
-// 			}
-// 			return
-// 		}
-// 	}
-// }
-
-func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-
-}

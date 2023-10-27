@@ -57,6 +57,8 @@ func BotConnect() {
 	dg.AddHandler(events.MessageCreate)
 	dg.AddHandler(events.MessageDelete)
 	dg.AddHandler(events.Ready)
+	dg.AddHandler(events.ChannelCreate)
+	dg.AddHandler(events.GuildBanAdd)
 
 	// Open a websocket connection to Discord and begin listening.
 	err = dg.Open()

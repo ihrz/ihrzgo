@@ -1,4 +1,4 @@
-package core
+package lang
 
 import (
 	"io/ioutil"
