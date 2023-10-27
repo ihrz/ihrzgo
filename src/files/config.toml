@@ -5,3 +5,8 @@ client_id = ""
 [api]
 use_https = true
 host_port = 3000
+
+[core]
+debug_mode = true
+blacklist_picture_url = "https://url-to-link"
+guild_logs_channel_id = "1139545238533312662"

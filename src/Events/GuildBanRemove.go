@@ -8,10 +8,12 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func serverLogsForBanAdd(session *discordgo.Session, ban *discordgo.GuildBanAdd) {
-	// p, err := session.UserChannelPermissions(session.State.User.ID, ban.GuildID)
+func GuildBanRemove(session *discordgo.Session, ban *discordgo.GuildBanRemove) {
+	serverLogsForBanRemove(session, ban)
+}
 
-	// if p&discordgo.PermissionViewAuditLogs != discordgo.PermissionViewAuditLogs {
+func serverLogsForBanRemove(session *discordgo.Session, ban *discordgo.GuildBanRemove) {
+	// if session.State.User == nil || !hasPermission(session.State.User.ID, ban.GuildID, discordgo.PermissionViewAuditLogs) {
 	// 	return
 	// }
 
@@ -31,7 +33,6 @@ func serverLogsForBanAdd(session *discordgo.Session, ban *discordgo.GuildBanAdd)
 	// if someInfo == "" {
 	// 	return
 	// }
-
 	var data = lang.GetLanguage()
 
 	msgChannel, err := session.State.Channel("1139545236268384356")
@@ -40,8 +41,8 @@ func serverLogsForBanAdd(session *discordgo.Session, ban *discordgo.GuildBanAdd)
 		return
 	}
 
-	description := strings.Replace(data["event_srvLogs_banAdd_description"].(string), "${firstEntry.executor.id}", firstEntry.ID, -1)
-	description = strings.Replace(description, "${firstEntry.target.id}", ban.User.ID, -1)
+	description := strings.Replace(data["event_srvLogs_banRemove_description"].(string), "${firstEntry.executor.id}", firstEntry.ID, -1)
+	description = strings.Replace(description, "${firstEntry.target.username}", firstEntry.Username, -1)
 
 	logsEmbed := &discordgo.MessageEmbed{
 		Color:       0x000000,
@@ -53,8 +54,4 @@ func serverLogsForBanAdd(session *discordgo.Session, ban *discordgo.GuildBanAdd)
 	if err != nil {
 		// Gérer les erreurs
 	}
-}
-
-func GuildBanAdd(s *discordgo.Session, b *discordgo.GuildBanAdd) {
-	serverLogsForBanAdd(s, b)
 }

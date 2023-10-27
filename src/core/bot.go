@@ -4,49 +4,17 @@ import (
 	"fmt"
 	commands "main/src"
 	events "main/src/Events"
+	"main/src/core/config"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/pelletier/go-toml/v2"
 )
 
-type Config struct {
-	Bot BotConfig
-	API Api
-}
-
-type BotConfig struct {
-	DiscordToken string `toml:"discord_token"`
-	ClientID     string `toml:"client_id"`
-}
-
-type Api struct {
-	UseHttps bool `toml:"use_https"`
-	HostPort int  `toml:"host_port"`
-}
-
 func BotConnect() {
-	tomlFilePath := "src/files/config.toml"
 
-	file, err := os.Open(tomlFilePath)
-	if err != nil {
-		fmt.Println("Erreur lors de l'ouverture du fichier TOML:", err)
-		return
-	}
-	defer file.Close()
-
-	var config Config
-
-	// Chargez les données depuis le fichier TOML en décodant dans la structure
-	if err := toml.NewDecoder(file).Decode(&config); err != nil {
-		fmt.Println("Erreur lors du chargement du fichier TOML:", err)
-		return
-	}
-
-	// connection avec le token
-	dg, err := discordgo.New("Bot " + config.Bot.DiscordToken)
+	dg, err := discordgo.New("Bot " + config.Main.Bot.DiscordToken)
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -54,12 +22,18 @@ func BotConnect() {
 
 	// Register the events for the bot.
 	dg.AddHandler(commands.HandleCommand)
+
 	dg.AddHandler(events.MessageCreate)
 	dg.AddHandler(events.MessageDelete)
-	dg.AddHandler(events.Ready)
-	dg.AddHandler(events.ChannelCreate)
-	dg.AddHandler(events.GuildBanAdd)
 
+	dg.AddHandler(events.Ready)
+
+	dg.AddHandler(events.ChannelCreate)
+
+	dg.AddHandler(events.GuildBanAdd)
+	dg.AddHandler(events.GuildBanRemove)
+
+	dg.AddHandler(events.GuildCreate)
 	// Open a websocket connection to Discord and begin listening.
 	err = dg.Open()
 	if err != nil {
