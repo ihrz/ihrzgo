@@ -37,6 +37,5 @@ func init() {
 			},
 		})
 	}
-
 	commands.AddCommand(command, commandHandler)
 }
