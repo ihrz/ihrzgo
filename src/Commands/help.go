@@ -35,7 +35,7 @@ func init() {
 			},
 			Footer: &discordgo.MessageEmbedFooter{
 				Text:    s.State.User.Username,
-				IconURL: s.State.User.AvatarURL("512"),
+				IconURL: s.State.User.AvatarURL(""),
 			},
 			Color: 15859878,
 		}
