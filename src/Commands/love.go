@@ -52,37 +52,37 @@ func init() {
 			// Remplacer par la logique pour obtenir un utilisateur au hasard dans la guilde
 		}
 
-		// // profileImageSize := 512
-		// // canvasWidth := profileImageSize * 3
-		// // canvasHeight := profileImageSize
+		// profileImageSize := 512
+		// canvasWidth := profileImageSize * 3
+		// canvasHeight := profileImageSize
 
-		// // dc := gg.NewContext(canvasWidth, canvasHeight)
-		// // heartEmojiPath := "./src/assets/heart.png"
-		// // profileImage1URL := user1.AvatarURL("512")
-		// // profileImage2URL := user2.AvatarURL("512")
+		// dc := gg.NewContext(canvasWidth, canvasHeight)
+		// heartEmojiPath := "./src/assets/heart.png"
+		// profileImage1URL := user1.AvatarURL("512")
+		// profileImage2URL := user2.AvatarURL("512")
 
-		// // // Charger les images
+		// Charger les images
 
-		// // profileImage1 := loadImage(profileImage1URL)
-		// // profileImage2 := loadImage(profileImage2URL)
-		// // heartEmoji := loadImage(heartEmojiPath)
+		// profileImage1 := loadImage(profileImage1URL)
+		// profileImage2 := loadImage(profileImage2URL)
+		// heartEmoji := loadImage(heartEmojiPath)
 
-		// // dc.DrawImage(profileImage1, 0, 0)
-		// // heartX := float64(profileImageSize)
-		// // heartY := float64(profileImageSize/2 - heartEmoji.Height()/2)
-		// // dc.DrawImage(heartEmoji, int(heartX), int(heartY))
-		// // dc.DrawImage(profileImage2, int(profileImageSize*1+float64(heartEmoji.Width())), 0)
+		// dc.DrawImage(profileImage1, 0, 0)
+		// heartX := float64(profileImageSize)
+		// heartY := float64(profileImageSize/2 - heartEmoji.Height()/2)
+		// dc.DrawImage(heartEmoji, int(heartX), int(heartY))
+		// dc.DrawImage(profileImage2, int(profileImageSize*1+float64(heartEmoji.Width())), 0)
 
-		// // Convertir le dessin en une image
+		// Convertir le dessin en une image
 
-		// // img := dc.Image()
-		// // img = resize.Resize(512, 0, img, resize.Lanczos3)
-		// // buffer := new(bytes.Buffer)
-		// // png.Encode(buffer, img)
+		// img := dc.Image()
+		// img = resize.Resize(512, 0, img, resize.Lanczos3)
+		// buffer := new(bytes.Buffer)
+		// png.Encode(buffer, img)
 
-		// // always100 := config.Main.More.Always100
-		// // user1IDStr := user1.ID
-		// // user2IDStr := user2.ID
+		// always100 := config.Main.More.Always100
+		// user1IDStr := user1.ID
+		// user2IDStr := user2.ID
 		lovePercentage := 0
 
 		// always100 := config.Main.More.Always100
