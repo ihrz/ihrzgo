@@ -8,6 +8,5 @@ import (
 func main() {
 	core.InitDatabase()
 	commands.InitialDynamicImport()
-	// core.EventManager()
 	core.BotConnect()
 }
