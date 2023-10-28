@@ -3,8 +3,8 @@ package core
 import (
 	"fmt"
 	commands "main/src"
-	events "main/src/Events"
 	"main/src/core/config"
+	events "main/src/events"
 	"os"
 	"os/signal"
 	"syscall"
