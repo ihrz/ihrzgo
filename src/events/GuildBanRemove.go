@@ -33,7 +33,7 @@ func serverLogsForBanRemove(session *discordgo.Session, ban *discordgo.GuildBanR
 	// if someInfo == "" {
 	// 	return
 	// }
-	var data = lang.GetLanguage()
+	var data = lang.GetLanguage(&ban.GuildID)
 
 	msgChannel, err := session.State.Channel("1139545236268384356")
 	if err != nil {

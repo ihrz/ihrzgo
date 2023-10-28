@@ -15,7 +15,7 @@ func ihrzLogs(session *discordgo.Session, channel *discordgo.ChannelCreate) {
 		return
 	}
 
-	lang := lang.GetLanguage()
+	lang := lang.GetLanguage(&channel.GuildID)
 
 	setupEmbed := &discordgo.MessageEmbed{
 		Color:       0x1e1d22,

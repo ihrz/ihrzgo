@@ -6,8 +6,13 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func GetLanguage() map[string]interface{} {
+func GetLanguage(guildId *string) map[string]interface{} {
+	// faire une requests a la db pour savoir en quelle langue le server la configurée
+
 	filePath := "src/lang/en-US.yml"
+
+	// var defaultLanguage = "en-US"
+	// var lang = db.GetLanguagePerGuildID(guildId)
 
 	// Lire le contenu du fichier YAML
 	yamlFile, err := ioutil.ReadFile(filePath)

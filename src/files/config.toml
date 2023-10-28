@@ -10,3 +10,6 @@ host_port = 3000
 debug_mode = true
 blacklist_picture_url = "https://url-to-link"
 guild_logs_channel_id = "1139545238533312662"
+
+[more]
+always100 = []

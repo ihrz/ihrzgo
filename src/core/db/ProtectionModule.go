@@ -1,12 +1,10 @@
 package db
 
 import (
-	"main/src/core"
-
 	"gorm.io/gorm"
 )
 
-var db = core.GetDatabase()
+var db = GetDatabase()
 
 func GetAllowList(str *string) {
 	type Product struct {

@@ -168,7 +168,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 func reactToMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
-	if m.GuildID == "" || m.Author.Bot {
+	if m.GuildID == "" || m.Author.Bot || m == nil {
 		return
 	}
 

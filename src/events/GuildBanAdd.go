@@ -21,6 +21,8 @@ func serverLogsForBanAdd(session *discordgo.Session, ban *discordgo.GuildBanAdd)
 		return
 	}
 
+	// db := db.GetDatabase()
+
 	if len(fetchedLogs.Users) == 0 {
 		return
 	}
@@ -32,7 +34,7 @@ func serverLogsForBanAdd(session *discordgo.Session, ban *discordgo.GuildBanAdd)
 	// 	return
 	// }
 
-	var data = lang.GetLanguage()
+	var data = lang.GetLanguage(&ban.GuildID)
 
 	msgChannel, err := session.State.Channel("1139545236268384356")
 	if err != nil {

@@ -12,6 +12,7 @@ type Config struct {
 	Bot  BotConfig
 	API  Api
 	Core Core
+	More More
 }
 
 // BotConfig contient la configuration du bot
@@ -30,6 +31,10 @@ type Core struct {
 	Debug               bool   `toml:"debug_mode"`
 	BlacklistPictureURL string `toml:"blacklist_picture_url"`
 	GuildLogsChannelID  string `toml:"guild_logs_channel_id"`
+}
+
+type More struct {
+	Always100 any `toml:"always100"`
 }
 
 // LoadConfig charge la configuration depuis un fichier TOML

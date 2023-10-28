@@ -16,7 +16,7 @@ func init() {
 
 	commandHandler := func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
-		var lang = lang.GetLanguage()
+		var lang = lang.GetLanguage(&i.GuildID)
 
 		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 			Type: discordgo.InteractionResponseChannelMessageWithSource,

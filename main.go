@@ -3,10 +3,11 @@ package main
 import (
 	commands "main/src/Commands"
 	"main/src/core"
+	"main/src/core/db"
 )
 
 func main() {
-	core.InitDatabase()
+	db.InitDatabase()
 	commands.InitialDynamicImport()
 	core.BotConnect()
 }
