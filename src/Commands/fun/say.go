@@ -1,5 +1,4 @@
-// ping.go
-package commands
+package fun
 
 import (
 	commands "main/src"

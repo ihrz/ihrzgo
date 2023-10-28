@@ -1,11 +1,10 @@
-package commands
+package fun
 
 type File struct {
 	Name string
 }
 
 func init() {
-	// Enregistrez le fichier actntFile)
 }
 
 func InitialDynamicImport() {

@@ -1,13 +1,26 @@
 package main
 
 import (
-	commands "main/src/Commands"
+	"main/src/Commands/bot"
+	"main/src/Commands/fun"
 	"main/src/core"
 	"main/src/core/db"
 )
 
 func main() {
+	/*
+		Init The Database
+	*/
 	db.InitDatabase()
-	commands.InitialDynamicImport()
+
+	/*
+		Fetch All Commands
+	*/
+	bot.InitialDynamicImport()
+	fun.InitialDynamicImport()
+
+	/*
+		After all, start the bot
+	*/
 	core.BotConnect()
 }
