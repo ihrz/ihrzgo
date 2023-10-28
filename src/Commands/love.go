@@ -104,13 +104,6 @@ func init() {
 			Color:       0xFFC0CB,
 			Title:       "💕",
 			Description: desc,
-			// Fields: []*discordgo.MessageEmbedField{
-			// 	{
-			// 		Name:   user2.Username,
-			// 		Value:  "❤️".Repeat(lovePercentage) + "🖤".Repeat(100-lovePercentage),
-			// 		Inline: true,
-			// 	},
-			// },
 			Footer: &discordgo.MessageEmbedFooter{
 				Text:    "iHorizon",
 				IconURL: s.State.User.AvatarURL(""),
@@ -144,11 +137,6 @@ func contains(slice []string, str string) bool {
 		}
 	}
 	return false
-}
-
-// Helper function to repeat a string n times
-func repeat(s string, n int) string {
-	return strings.Repeat(s, n)
 }
 
 // // Helper function to load an image from a URL
