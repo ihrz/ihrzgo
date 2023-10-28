@@ -10,8 +10,8 @@ import (
 )
 
 func GuildCreate(s *discordgo.Session, g *discordgo.GuildCreate) {
-	messageToServer(s, g)
-	ownerLogsForGuildCreate(s, g)
+	// messageToServer(s, g)
+	// ownerLogsForGuildCreate(s, g)
 }
 
 func messageToServer(session *discordgo.Session, guild *discordgo.GuildCreate) {
