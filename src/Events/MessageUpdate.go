@@ -9,15 +9,14 @@ func MessageUpdate(s *discordgo.Session, m *discordgo.MessageUpdate) {
 }
 
 func serverLogsForMessageUpdate(s *discordgo.Session, m *discordgo.MessageUpdate) {
-
 	println(m, s)
 	println(m.BeforeUpdate.Content)
 }
 
-func getServerLogsMessage(guildID string) string {
-	// Mettez ici la logique pour récupérer l'ID du canal de logs
-	return ""
-}
+// func getServerLogsMessage(guildID string) string {
+// 	// Mettez ici la logique pour récupérer l'ID du canal de logs
+// 	return ""
+// }
 
 // message, err := s.State.Message(m.ChannelID, m.ID)
 // if err != nil {

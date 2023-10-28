@@ -37,6 +37,7 @@ func BotConnect() {
 	dg.AddHandler(events.GuildCreate)
 	// Open a websocket connection to Discord and begin listening.
 
+	dg.State.MaxMessageCount = 100
 	dg.Identify.Intents = discordgo.IntentsAll
 	err = dg.Open()
 	if err != nil {
