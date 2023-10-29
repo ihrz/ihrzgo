@@ -12,4 +12,4 @@ blacklist_picture_url = ""
 guild_logs_channel_id = ""
 
 [more]
-always100 = []
+always100 = ["DiscordUserIdxDiscordUserId"]
