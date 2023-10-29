@@ -4,6 +4,7 @@ import (
 	"main/src/commands/bot"
 	"main/src/commands/fun"
 	"main/src/commands/pfps"
+	"main/src/commands/utils"
 	"main/src/core"
 	"main/src/core/db"
 )
@@ -20,6 +21,7 @@ func main() {
 	bot.InitialDynamicImport()
 	fun.InitialDynamicImport()
 	pfps.InitialDynamicImport()
+	utils.InitialDynamicImport()
 
 	/*
 		After all, start the bot

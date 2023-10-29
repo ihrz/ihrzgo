@@ -3,6 +3,7 @@ package fun
 import (
 	"bytes"
 	commands "main/src"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 	resty "github.com/go-resty/resty/v2"
@@ -24,13 +25,16 @@ func init() {
 
 	commandHandler := func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		options := i.ApplicationCommandData().Options
-		userOption := options[0].UserValue(s)
-		user := i.Member.User
-		if userOption != nil {
-			user = userOption
+
+		var user *discordgo.User
+
+		if len(options) > 0 {
+			user = options[0].UserValue(s)
+		} else {
+			user = i.Member.User
 		}
 
-		link := generateTransgenderImageURL(user.AvatarURL("png"))
+		link := generateTransgenderImageURL(user.AvatarURL("512"))
 
 		imgs, err := getTransgenderImage(link)
 		if err != nil {
@@ -47,7 +51,7 @@ func init() {
 				Text:    "iHorizon x ElektraBots",
 				IconURL: s.State.User.AvatarURL(""),
 			},
-			// Timestamp: i.CreatedAt,
+			Timestamp: time.Now().Format(time.RFC3339),
 		}
 
 		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
