@@ -1,0 +1,15 @@
+[bot]
+discord_token = ""
+client_id = ""
+
+[api]
+use_https = true
+host_port = 3000
+
+[core]
+debug_mode = true
+blacklist_picture_url = ""
+guild_logs_channel_id = ""
+
+[more]
+always100 = []
