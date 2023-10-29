@@ -8,37 +8,37 @@ import (
 )
 
 // Config est la structure de configuration
-type Config struct {
-	Bot  BotConfig
-	API  Api
-	Core Core
-	More More
+type config struct {
+	Bot  botConfig
+	API  api
+	Core core
+	More more
 }
 
 // BotConfig contient la configuration du bot
-type BotConfig struct {
+type botConfig struct {
 	DiscordToken string `toml:"discord_token"`
 	ClientID     string `toml:"client_id"`
 }
 
 // Api contient la configuration de l'API
-type Api struct {
+type api struct {
 	UseHttps bool `toml:"use_https"`
 	HostPort int  `toml:"host_port"`
 }
 
-type Core struct {
+type core struct {
 	Debug               bool   `toml:"debug_mode"`
 	BlacklistPictureURL string `toml:"blacklist_picture_url"`
 	GuildLogsChannelID  string `toml:"guild_logs_channel_id"`
 }
 
-type More struct {
+type more struct {
 	Always100 any `toml:"always100"`
 }
 
 // LoadConfig charge la configuration depuis un fichier TOML
-func LoadConfig() Config {
+func loadConfig() config {
 	tomlFilePath := "src/files/config.toml"
 
 	file, err := os.Open(tomlFilePath)
@@ -47,7 +47,7 @@ func LoadConfig() Config {
 		panic(err)
 	}
 	defer file.Close()
-	var config Config
+	var config config
 
 	// Chargez les données depuis le fichier TOML en décodant dans la structure
 	if err := toml.NewDecoder(file).Decode(&config); err != nil {
@@ -59,4 +59,4 @@ func LoadConfig() Config {
 }
 
 // Configuration publique que vous pouvez utiliser ailleurs
-var Main = LoadConfig()
+var Main = loadConfig()
