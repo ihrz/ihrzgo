@@ -1,6 +1,7 @@
 package fun
 
 import (
+	"fmt"
 	commands "main/src"
 	"main/src/core/lang"
 	"strings"
@@ -67,16 +68,16 @@ func init() {
 		}
 
 		// Ajouter les réactions "✅" et "❌" au message
+		msg, err := s.InteractionResponse(i.Interaction)
 
-		err = s.MessageReactionAdd(i.GuildID, i.Interaction.Message.ID, "✅")
+		err = s.MessageReactionAdd(i.ChannelID, msg.ID, "✅")
 		if err != nil {
-			// Gérez l'erreur
+			fmt.Printf("%+v\n", err)
 			return
 		}
-
-		err = s.MessageReactionAdd(i.GuildID, i.Interaction.Message.ID, "❌")
+		err = s.MessageReactionAdd(i.ChannelID, msg.ID, "❌")
 		if err != nil {
-			// Gérez l'erreur
+			fmt.Printf("%+v\n", err)
 			return
 		}
 	}
