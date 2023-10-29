@@ -75,6 +75,7 @@ func init() {
 			fmt.Printf("%+v\n", err)
 			return
 		}
+
 		err = s.MessageReactionAdd(i.ChannelID, msg.ID, "❌")
 		if err != nil {
 			fmt.Printf("%+v\n", err)
