@@ -1,9 +1,9 @@
 package main
 
 import (
-	"main/src/Commands/bot"
-	"main/src/Commands/fun"
-	"main/src/Commands/pfps"
+	"main/src/commands/bot"
+	"main/src/commands/fun"
+	"main/src/commands/pfps"
 	"main/src/core"
 	"main/src/core/db"
 )
