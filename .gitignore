@@ -20,4 +20,4 @@
 # Go workspace file
 go.work
 
-src/files/config.toml
+files/data/config.toml
