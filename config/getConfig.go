@@ -39,7 +39,7 @@ type more struct {
 
 // LoadConfig charge la configuration depuis un fichier TOML
 func loadConfig() config {
-	tomlFilePath := "src/files/config.toml"
+	tomlFilePath := "files/data/config.toml"
 
 	file, err := os.Open(tomlFilePath)
 	if err != nil {
