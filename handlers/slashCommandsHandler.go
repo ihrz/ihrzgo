@@ -1,59 +1,42 @@
 package commands
 
-// import (
-// 	"fmt"
+import (
+	"fmt"
 
-// 	"github.com/bwmarrin/discordgo"
-// )
+	"github.com/disgoorg/disgo/bot"
+	"github.com/disgoorg/disgo/discord"
+	"github.com/disgoorg/disgo/events"
+)
 
-// var commandHandlers = make(map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate))
-// var registeredCommands = make([]*discordgo.ApplicationCommand, 0)
+var commandHandlers = make(map[string]func(c bot.Client, i *events.ApplicationCommandInteractionCreate))
+var registeredCommands = make([]discord.ApplicationCommandCreate, 0)
 
-// // AddCommand ajoute une commande au gestionnaire
-// func AddCommand(command *discordgo.ApplicationCommand, handler func(s *discordgo.Session, i *discordgo.InteractionCreate)) {
-// 	commandHandlers[command.Name] = handler
-// 	registeredCommands = append(registeredCommands, command)
-// }
+// AddCommand ajoute une commande au gestionnaire
+func AddCommand(command *discord.SlashCommandCreate, handler func(s bot.Client, i *events.ApplicationCommandInteractionCreate)) {
+	commandHandlers[command.Name] = handler
+	registeredCommands = append(registeredCommands, command)
+}
 
-// // RegisterCommands enregistre toutes les commandes dans Discord
-// func RegisterCommands(s *discordgo.Session, botID, guildID string) {
+// RegisterCommands enregistre toutes les commandes dans Discord
+func RegisterCommands(client bot.Client, botID, guildID string) {
 
-// 	commands, err := s.ApplicationCommands(botID, "")
-// 	if err != nil {
-// 		panic(err)
-// 	}
+	fmt.Println(registeredCommands)
+	client.Rest().SetGlobalCommands(client.ApplicationID(), registeredCommands)
+	// slog.Error("error while registering commands", slog.Any("err", err))
 
-// 	for _, command := range commands {
-// 		// Vérifiez si la commande actuelle doit être supprimée
-// 		shouldDelete := true
-// 		for _, registeredCommand := range registeredCommands {
-// 			if registeredCommand.Name == command.Name && registeredCommand.Description == command.Description {
-// 				shouldDelete = false
-// 				break
-// 			}
-// 		}
+	// if err = client.OpenGateway(context.TODO()); err != nil {
+	// 	slog.Error("error while connecting to gateway", slog.Any("err", err))
+	// }
+}
 
-// 		if shouldDelete {
-// 			// Supprimez la commande
-// 			err := s.ApplicationCommandDelete(botID, "", command.ID)
-// 			if err != nil {
-// 				panic(err)
-// 			}
-// 		}
-// 	}
+// HandleCommand gère les interactions de commande
+func HandleCommand(s bot.Client, i *events.ApplicationCommandInteractionCreate) {
 
-// 	for _, command := range registeredCommands {
-// 		fmt.Println("Registering :", command.Name)
-// 		_, err := s.ApplicationCommandCreate(botID, "", command)
-// 		if err != nil {
-// 			panic(err)
-// 		}
-// 	}
-// }
+	t := &events.IntegrationCreate{
+		GenericIntegration: i,
+	}
 
-// // HandleCommand gère les interactions de commande
-// func HandleCommand(s *discordgo.Session, i *discordgo.InteractionCreate) {
-// 	if handler, exists := commandHandlers[i.ApplicationCommandData().Name]; exists {
-// 		handler(s, i)
-// 	}
-// }
+	if handler, exists := commandHandlers[t.SlashCommandInteractionData().CommandName()]; exists {
+		handler(s, i)
+	}
+}
